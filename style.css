@@ -91,7 +91,7 @@ footer > * { pointer-events: auto; }
   font-size: 20px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: var(--black);
 }
 
 /* ─── AI LAB button ──────────────────────────────────────── */
@@ -382,7 +382,7 @@ body.project-page main {
   font-size: 20px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: var(--black);
   text-decoration: none;
   transition: color 0.2s;
   white-space: nowrap;
