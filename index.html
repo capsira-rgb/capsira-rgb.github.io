@@ -17,17 +17,7 @@
 
   <footer>
     <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
-    <button class="ailab-btn" onclick="document.getElementById('ailabOverlay').classList.add('open')">
-      <svg class="ailab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 3H7a2 2 0 0 0-2 2v1"/>
-        <path d="M15 3h2a2 2 0 0 1 2 2v1"/>
-        <path d="M5 6h14"/>
-        <path d="M5 6l2 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l2-13"/>
-        <path d="M10 11v4"/>
-        <path d="M14 11v4"/>
-      </svg>
-      AI Lab
-    </button>
+    <a href="ailab.html" class="ailab-btn">🧪 AI Lab</a>
   </footer>
 
   <script src="projects.js"></script>
@@ -44,7 +34,6 @@
       item.href = `project.html?p=${encodeURIComponent(project.folder)}`;
       item.style.animationDelay = `${i * 35}ms`;
 
-      // Fallback chain: gif → jpg → lorem.png
       const onerror = `this.onerror=null;this.src='lorem.png'`;
 
       item.innerHTML = `
@@ -58,7 +47,6 @@
 
       grid.appendChild(item);
     });
-    }
   </script>
 
 </body>
