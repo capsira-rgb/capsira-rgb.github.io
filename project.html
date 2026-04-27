@@ -17,14 +17,38 @@
 
   <footer>
     <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
+    <button class="ailab-btn" onclick="document.getElementById('ailabOverlay').classList.add('open')">
+      <svg class="ailab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3H7a2 2 0 0 0-2 2v1"/>
+        <path d="M15 3h2a2 2 0 0 1 2 2v1"/>
+        <path d="M5 6h14"/>
+        <path d="M5 6l2 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l2-13"/>
+        <path d="M10 11v4"/>
+        <path d="M14 11v4"/>
+      </svg>
+      AI Lab
+    </button>
   </footer>
+
+  <!-- AI LAB Modal -->
+  <div class="ailab-overlay" id="ailabOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="ailab-modal">
+      <button class="ailab-close" onclick="document.getElementById('ailabOverlay').classList.remove('open')">×</button>
+      <h2>Requesting access to a restricted area<br>of AI content creation</h2>
+      <input class="ailab-input" type="email" placeholder="your@email.com" id="ailabEmail">
+      <button class="ailab-submit" onclick="handleAilabSubmit()">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5,3 19,12 5,21" />
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <script src="projects.js"></script>
   <script>
     function getParam(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
-
     function getVimeoId(url) {
       if (!url) return null;
       const match = url.match(/(\d{5,})/);
@@ -40,29 +64,28 @@
     } else {
       const vimeoId = getVimeoId(project.vimeo);
       let html = `<h1 class="project-title">${project.title}</h1>`;
-
       if (vimeoId) {
         html += `
           <div class="video-wrap">
-            <iframe
-              src="https://player.vimeo.com/video/${vimeoId}?color=ffffff&title=0&byline=0&portrait=0"
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        `;
+            <iframe src="https://player.vimeo.com/video/${vimeoId}?color=ffffff&title=0&byline=0&portrait=0"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          </div>`;
       }
-
       if (project.photos && project.photos.length > 0) {
         html += `<div class="photo-masonry">`;
-        project.photos.forEach(filename => {
-          html += `<img src="projects/${project.folder}/${filename}" alt="${project.title}" loading="lazy">`;
+        project.photos.forEach(f => {
+          html += `<img src="projects/${project.folder}/${f}" alt="${project.title}" loading="lazy">`;
         });
         html += `</div>`;
       }
-
       content.innerHTML = html;
+    }
+
+    function handleAilabSubmit() {
+      const email = document.getElementById('ailabEmail').value;
+      if (email) {
+        document.getElementById('ailabOverlay').classList.remove('open');
+      }
     }
   </script>
 
