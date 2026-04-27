@@ -36,21 +36,22 @@
       const email = document.getElementById('ailabEmail').value;
       if (!email || !email.includes('@')) return;
 
-      const btn = document.getElementById('ailabBtn');
-      btn.disabled = true;
+      document.getElementById('ailabBtn').disabled = true;
 
+      // Send email via Web3Forms — replace ACCESS_KEY with your key from web3forms.com
       try {
-        await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        await fetch('https://formspree.io/f/mrervvzk', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             _subject: 'AI LAB ACCESS REQUEST BY ' + email,
-            message: 'Alguien ha pulsado el botón de acceso al AI LAB.\nMail: ' + email,
+            message: 'Alguien ha pulsado el botón de acceso al AI LAB.\n\nMail: ' + email,
             email: email
           })
         });
       } catch(e) {}
 
+      // Always show SENT regardless of network result
       document.getElementById('ailabForm').style.display = 'none';
       document.getElementById('ailabSent').style.display = 'block';
     }
