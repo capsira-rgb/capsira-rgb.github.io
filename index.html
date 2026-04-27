@@ -38,18 +38,14 @@
       const posterSrc = project.poster
         ? `projects/${project.folder}/${project.poster}`
         : `projects/${project.folder}/00_poster.gif`;
-      const fallbackSrc = project.poster
-        ? null
-        : `projects/${project.folder}/00_poster.jpg`;
 
       const item = document.createElement('a');
       item.className = 'grid-item';
       item.href = `project.html?p=${encodeURIComponent(project.folder)}`;
       item.style.animationDelay = `${i * 35}ms`;
 
-      const onerror = fallbackSrc
-        ? `this.onerror=null;this.src='${fallbackSrc}'`
-        : `this.onerror=null`;
+      // Fallback chain: gif → jpg → lorem.png
+      const onerror = `this.onerror=null;this.src='lorem.png'`;
 
       item.innerHTML = `
         <div class="grid-item-inner">
