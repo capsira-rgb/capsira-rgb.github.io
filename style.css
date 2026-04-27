@@ -370,3 +370,97 @@ body.project-page main {
 @media (max-width: 480px) {
   main#grid { grid-template-columns: 1fr; }
 }
+
+/* ─── AI LAB button (footer) ─────────────────────────────── */
+.ailab-btn {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.ailab-btn:hover { color: var(--black); }
+
+/* ─── AI LAB page ────────────────────────────────────────── */
+body.ailab-page {
+  background: var(--white);
+}
+
+.ailab-main {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ailab-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.ailab-heading {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 2;
+}
+
+.ailab-input {
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid rgba(14,14,14,0.3);
+  padding: 10px 0;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  outline: none;
+  text-align: center;
+  width: 280px;
+}
+.ailab-input::placeholder { color: var(--mid); }
+.ailab-input:focus { border-bottom-color: var(--black); }
+
+.ailab-submit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-triangle 2.4s ease-in-out infinite;
+}
+.ailab-submit:disabled { cursor: default; }
+
+@keyframes pulse-triangle {
+  0%   { opacity: 0.25; filter: hue-rotate(0deg); }
+  25%  { opacity: 1;    filter: hue-rotate(80deg); }
+  50%  { opacity: 0.5;  filter: hue-rotate(180deg); }
+  75%  { opacity: 1;    filter: hue-rotate(280deg); }
+  100% { opacity: 0.25; filter: hue-rotate(360deg); }
+}
+
+.ailab-sent {
+  display: none;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
