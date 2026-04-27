@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Gutiérrez</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="project-page">
+
+  <header>
+    <a href="index.html" class="site-name back-link">Laura Gutiérrez</a>
+    <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
+  </header>
+
+  <main id="project-content"></main>
+
+  <footer>
+    <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script>
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function getVimeoId(url) {
+      if (!url) return null;
+      const match = url.match(/(\d{5,})/);
+      return match ? match[1] : null;
+    }
+
+    const folderParam = getParam('p');
+    const project = projects.find(p => p.folder === folderParam);
+    const content = document.getElementById('project-content');
+
+    if (!project) {
+      content.innerHTML = '<p class="error">Project not found.</p>';
+    } else {
+      const vimeoId = getVimeoId(project.vimeo);
+      let html = `<h1 class="project-title">${project.title}</h1>`;
+
+      if (vimeoId) {
+        html += `
+          <div class="video-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/${vimeoId}?color=ffffff&title=0&byline=0&portrait=0"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        `;
+      }
+
+      if (project.photos && project.photos.length > 0) {
+        html += `<div class="photo-masonry">`;
+        project.photos.forEach(filename => {
+          html += `<img src="projects/${project.folder}/${filename}" alt="${project.title}" loading="lazy">`;
+        });
+        html += `</div>`;
+      }
+
+      content.innerHTML = html;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Gutiérrez</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <span class="site-name">Laura Gutiérrez</span>
+    <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
+  </header>
+
+  <main id="grid"></main>
+
+  <footer>
+    <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script>
+    const grid = document.getElementById('grid');
+
+    projects.forEach((project, i) => {
+      // Use explicit poster filename if set, otherwise try gif then jpg
+      const posterSrc = project.poster
+        ? `projects/${project.folder}/${project.poster}`
+        : `projects/${project.folder}/00_poster.gif`;
+      const fallbackSrc = project.poster
+        ? null
+        : `projects/${project.folder}/00_poster.jpg`;
+
+      const item = document.createElement('a');
+      item.className = 'grid-item';
+      item.href = `project.html?p=${encodeURIComponent(project.folder)}`;
+      item.style.animationDelay = `${i * 35}ms`;
+
+      const onerror = fallbackSrc
+        ? `this.onerror=null;this.src='${fallbackSrc}'`
+        : `this.onerror=null`;
+
+      item.innerHTML = `
+        <div class="grid-item-inner">
+          <img class="poster" src="${posterSrc}" onerror="${onerror}" alt="${project.title}" loading="lazy">
+          <div class="overlay">
+            <span class="overlay-title">${project.title}</span>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(item);
+    });
+  </script>
+
+</body>
+</html>
