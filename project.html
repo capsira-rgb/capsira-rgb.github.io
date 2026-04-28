@@ -29,10 +29,7 @@
     var folderParam = getParam('p');
     var project = null;
     for (var i = 0; i < projects.length; i++) {
-      if (projects[i].folder === folderParam) {
-        project = projects[i];
-        break;
-      }
+      if (projects[i].folder === folderParam) { project = projects[i]; break; }
     }
 
     var content = document.getElementById('project-content');
@@ -41,15 +38,7 @@
       content.innerHTML = '<p class="error">Project not found.</p>';
     } else {
       var html = '<h1 class="project-title">' + project.title + '</h1>';
-
-      if (project.vimeo && project.vimeo.length > 0) {
-        for (var v = 0; v < project.vimeo.length; v++) {
-          html += '<div class="video-wrap">' +
-            '<iframe src="https://player.vimeo.com/video/' + project.vimeo[v] + '?color=ffffff&title=0&byline=0&portrait=0"' +
-            ' frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>' +
-            '</div>';
-        }
-      }
+      html += '<div id="videos-container"></div>';
 
       if (project.photos && project.photos.length > 0) {
         html += '<div class="photo-masonry">';
@@ -60,6 +49,39 @@
       }
 
       content.innerHTML = html;
+
+      // Load each vimeo with correct aspect ratio via oEmbed
+      if (project.vimeo && project.vimeo.length > 0) {
+        var container = document.getElementById('videos-container');
+        project.vimeo.forEach(function(id) {
+          var wrap = document.createElement('div');
+          wrap.className = 'video-wrap';
+          wrap.style.paddingBottom = '56.25%'; // default 16:9 while loading
+          container.appendChild(wrap);
+
+          fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=1280')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+              var ratio = (data.height / data.width * 100).toFixed(4);
+              wrap.style.paddingBottom = ratio + '%';
+              var iframe = document.createElement('iframe');
+              iframe.src = 'https://player.vimeo.com/video/' + id + '?color=ffffff&title=0&byline=0&portrait=0';
+              iframe.setAttribute('frameborder', '0');
+              iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+              iframe.setAttribute('allowfullscreen', '');
+              wrap.appendChild(iframe);
+            })
+            .catch(function() {
+              // fallback if oEmbed fails
+              var iframe = document.createElement('iframe');
+              iframe.src = 'https://player.vimeo.com/video/' + id + '?color=ffffff&title=0&byline=0&portrait=0';
+              iframe.setAttribute('frameborder', '0');
+              iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+              iframe.setAttribute('allowfullscreen', '');
+              wrap.appendChild(iframe);
+            });
+        });
+      }
     }
   </script>
 
