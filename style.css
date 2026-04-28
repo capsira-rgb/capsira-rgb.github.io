@@ -273,6 +273,15 @@ body.ailab-page main {
   main#grid { columns: 2; }
   .photo-masonry { columns: 1; }
   body.project-page main { padding: 32px 16px calc(var(--footer-h) + 32px); }
+
+  .site-name,
+  .contact-link,
+  .tagline,
+  .ailab-btn,
+  .overlay-title,
+  .project-title {
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 480px) {

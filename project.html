@@ -43,14 +43,11 @@
         html += '<div class="videos-container">';
         for (var v = 0; v < project.vimeo.length; v++) {
           var id = project.vimeo[v];
-          // ratio: array parallel to vimeo, e.g. ["9/16","16/9"]
-          // if not set, default to 16/9
           var ratioStr = (project.ratio && project.ratio[v]) ? project.ratio[v] : '16/9';
-          var parts = ratioStr.split('/');
-          var pct = (parseFloat(parts[1]) / parseFloat(parts[0]) * 100).toFixed(4);
-          html += '<div class="video-wrap" style="padding-bottom:' + pct + '%">' +
+          var cssClass = 'video-wrap ratio-' + ratioStr.replace('/', '-');
+          html += '<div class="' + cssClass + '">' +
             '<iframe src="https://player.vimeo.com/video/' + id +
-            '?color=ffffff&title=0&byline=0&portrait=0&transparent=0"' +
+            '?color=ffffff&title=0&byline=0&portrait=0"' +
             ' frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>' +
             '</div>';
         }
