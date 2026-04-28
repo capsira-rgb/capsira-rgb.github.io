@@ -16,8 +16,8 @@
   <main id="project-content"></main>
 
   <footer>
-    <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
-    <a href="ailab.html" class="ailab-btn">🧪 AI Lab</a>
+    <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
+    <a href="ailab.html" class="ailab-btn">AI Lab</a>
   </footer>
 
   <script src="projects.js"></script>
@@ -25,37 +25,41 @@
     function getParam(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
-    function getVimeoId(url) {
-      if (!url) return null;
-      const match = url.match(/(\d{5,})/);
-      return match ? match[1] : null;
+
+    var folderParam = getParam('p');
+    var project = null;
+    for (var i = 0; i < projects.length; i++) {
+      if (projects[i].folder === folderParam) {
+        project = projects[i];
+        break;
+      }
     }
 
-    const folderParam = getParam('p');
-    const project = projects.find(p => p.folder === folderParam);
-    const content = document.getElementById('project-content');
+    var content = document.getElementById('project-content');
 
     if (!project) {
       content.innerHTML = '<p class="error">Project not found.</p>';
     } else {
-      const vimeoId = getVimeoId(project.vimeo);
-      let html = `<h1 class="project-title">${project.title}</h1>`;
-      if (vimeoId) {
-        html += `
-          <div class="video-wrap">
-            <iframe src="https://player.vimeo.com/video/${vimeoId}?color=ffffff&title=0&byline=0&portrait=0"
-              frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          </div>`;
+      var html = '<h1 class="project-title">' + project.title + '</h1>';
+
+      if (project.vimeo && project.vimeo.length > 0) {
+        for (var v = 0; v < project.vimeo.length; v++) {
+          html += '<div class="video-wrap">' +
+            '<iframe src="https://player.vimeo.com/video/' + project.vimeo[v] + '?color=ffffff&title=0&byline=0&portrait=0"' +
+            ' frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>' +
+            '</div>';
+        }
       }
+
       if (project.photos && project.photos.length > 0) {
-        html += `<div class="photo-masonry">`;
-        project.photos.forEach(f => {
-          html += `<img src="projects/${project.folder}/${f}" alt="${project.title}" loading="lazy">`;
-        });
-        html += `</div>`;
+        html += '<div class="photo-masonry">';
+        for (var p = 0; p < project.photos.length; p++) {
+          html += '<img src="projects/' + project.folder + '/' + project.photos[p] + '" alt="' + project.title + '" loading="lazy">';
+        }
+        html += '</div>';
       }
+
       content.innerHTML = html;
-    }
     }
   </script>
 

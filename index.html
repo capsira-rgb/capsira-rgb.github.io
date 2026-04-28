@@ -16,37 +16,29 @@
   <main id="grid"></main>
 
   <footer>
-    <span class="tagline">Video &amp; Photo &nbsp;·&nbsp; Content creator specialist</span>
-    <a href="ailab.html" class="ailab-btn">🧪 AI Lab</a>
+    <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
+    <a href="ailab.html" class="ailab-btn">AI Lab</a>
   </footer>
 
   <script src="projects.js"></script>
   <script>
-    const grid = document.getElementById('grid');
-
-    projects.forEach((project, i) => {
-      const posterSrc = project.poster
-        ? `projects/${project.folder}/${project.poster}`
-        : `projects/${project.folder}/00_poster.gif`;
-
-      const item = document.createElement('a');
+    var grid = document.getElementById('grid');
+    for (var i = 0; i < projects.length; i++) {
+      var project = projects[i];
+      var posterSrc = 'projects/' + project.folder + '/' + project.poster;
+      var item = document.createElement('a');
       item.className = 'grid-item';
-      item.href = `project.html?p=${encodeURIComponent(project.folder)}`;
-      item.style.animationDelay = `${i * 35}ms`;
-
-      const onerror = `this.onerror=null;this.src='lorem.png'`;
-
-      item.innerHTML = `
-        <div class="grid-item-inner">
-          <img class="poster" src="${posterSrc}" onerror="${onerror}" alt="${project.title}" loading="lazy">
-          <div class="overlay">
-            <span class="overlay-title">${project.title}</span>
-          </div>
-        </div>
-      `;
-
+      item.href = 'project.html?p=' + encodeURIComponent(project.folder);
+      item.style.animationDelay = (i * 35) + 'ms';
+      item.innerHTML =
+        '<div class="grid-item-inner">' +
+          '<img class="poster" src="' + posterSrc + '" onerror="this.onerror=null;this.src=\'lorem.png\'" alt="' + project.title + '" loading="lazy">' +
+          '<div class="overlay">' +
+            '<span class="overlay-title">' + project.title + '</span>' +
+          '</div>' +
+        '</div>';
       grid.appendChild(item);
-    });
+    }
   </script>
 
 </body>
