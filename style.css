@@ -154,24 +154,23 @@ body.project-page main {
   margin-bottom: 40px;
 }
 
-/* Video wrap — uses aspect-ratio CSS property */
+/* Video wrap — aspect-ratio on the container */
 .video-wrap {
   width: 100%;
+  aspect-ratio: 16 / 9;
   margin-bottom: 48px;
-  background: #0e0e0e;
 }
 
 .video-wrap iframe {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   border: none;
 }
 
-.video-wrap.ratio-9-16 iframe { aspect-ratio: 9 / 16; max-width: 480px; margin: 0 auto; }
-.video-wrap.ratio-4-5 iframe  { aspect-ratio: 4 / 5;  max-width: 600px; margin: 0 auto; }
-.video-wrap.ratio-1-1 iframe  { aspect-ratio: 1 / 1;  max-width: 600px; margin: 0 auto; }
+.video-wrap.ratio-9-16 { aspect-ratio: 9 / 16; max-width: 480px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+.video-wrap.ratio-1-1  { aspect-ratio: 1 / 1;  max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+.video-wrap.ratio-4-5  { aspect-ratio: 4 / 5;  max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
 
 /* Photos masonry */
 .photo-masonry {
