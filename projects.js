@@ -79,7 +79,7 @@ const projects = [
 
   { folder: "14_el-corte-ingles-por-tu-verano",
     title: "El Corte Inglés Por Tu Verano",
-    vimeo: ["1187277351"], ratio: ["9/16"],
+    vimeo: ["1187277351"], ratio: ["1/1"],
     poster: "00_poster_eci.jpg",
     photos: [] },
 
@@ -103,7 +103,7 @@ const projects = [
 
   { folder: "18_miriam-quevedo-foam-solution",
     title: "Miriam Quevedo Foam Solution",
-    vimeo: ["581188346","581188389","493308244"], ratio: ["16/9","16/9","16/9"],
+    vimeo: ["581188389","493308244"], ratio: ["16/9","16/9"],
     poster: "00_poster_mq_foam.gif",
     photos: [] },
 

@@ -154,22 +154,24 @@ body.project-page main {
   margin-bottom: 40px;
 }
 
-/* Video wrap — ratio set dynamically via JS */
+/* Video wrap — uses aspect-ratio CSS property */
 .video-wrap {
-  position: relative;
   width: 100%;
-  height: 0;
-  overflow: hidden;
   margin-bottom: 48px;
   background: #0e0e0e;
 }
 
 .video-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border: none;
 }
+
+.video-wrap.ratio-9-16 iframe { aspect-ratio: 9 / 16; max-width: 480px; margin: 0 auto; }
+.video-wrap.ratio-4-5 iframe  { aspect-ratio: 4 / 5;  max-width: 600px; margin: 0 auto; }
+.video-wrap.ratio-1-1 iframe  { aspect-ratio: 1 / 1;  max-width: 600px; margin: 0 auto; }
 
 /* Photos masonry */
 .photo-masonry {
@@ -276,4 +278,157 @@ body.ailab-page main {
 
 @media (max-width: 480px) {
   main#grid { columns: 1; }
+}
+
+/* ─── AI Lab gate ────────────────────────────────────────── */
+.ailab-gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.ailab-gate-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 0 24px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.ailab-gate-label {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.ailab-gate-input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid rgba(14,14,14,0.3);
+  padding: 10px 0;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  outline: none;
+  text-align: center;
+}
+.ailab-gate-input::placeholder { color: #ccc; font-weight: 300; }
+.ailab-gate-input:focus { border-bottom-color: var(--black); }
+
+.ailab-gate-btn {
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity 0.2s;
+}
+.ailab-gate-btn:hover { opacity: 0.45; }
+
+.ailab-gate-error {
+  font-family: var(--font);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #999;
+  min-height: 16px;
+}
+
+.ailab-divider {
+  width: 40px;
+  height: 0.5px;
+  background: rgba(14,14,14,0.15);
+  margin: 16px 0;
+}
+
+.ailab-heading {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.ailab-input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid rgba(14,14,14,0.2);
+  padding: 8px 0;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  outline: none;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.ailab-input::placeholder { color: #bbb; }
+.ailab-input:focus { border-bottom-color: var(--black); }
+
+.ailab-submit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  animation: pulse-triangle 2.4s ease-in-out infinite;
+}
+
+.ailab-sent {
+  display: none;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* ─── AI Lab content grid ────────────────────────────────── */
+.ailab-content {
+  margin-top: var(--nav-h);
+  padding: var(--gap) var(--gap) calc(var(--footer-h) + var(--gap));
+}
+
+.ailab-grid {
+  columns: 3;
+  column-gap: var(--gap);
+}
+
+.ailab-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--gap);
+  break-inside: avoid;
+}
+
+@media (max-width: 768px) {
+  .ailab-grid { columns: 2; }
+}
+@media (max-width: 480px) {
+  .ailab-grid { columns: 1; }
 }
