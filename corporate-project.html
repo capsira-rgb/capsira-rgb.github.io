@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Gutierrez</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .vimeo-wrap {
+      position: relative;
+      width: 100%;
+      margin-bottom: 48px;
+    }
+    .vimeo-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .corp-title {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+    .corp-client {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+      color: #9a9890;
+    }
+    .corp-grid-3 {
+      columns: 3;
+      column-gap: 3px;
+      margin-top: 40px;
+    }
+    .corp-grid-3 img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-bottom: 3px;
+      break-inside: avoid;
+    }
+    @media (max-width: 768px) {
+      .corp-grid-3 { columns: 2; }
+    }
+  </style>
+</head>
+<body class="project-page">
+
+  <header>
+    <a href="corporate.html" class="site-name back-link">Laura Gutierrez</a>
+    <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
+  </header>
+
+  <main id="corp-content"></main>
+
+  <footer>
+    <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
+    <a href="ailab.html" class="ailab-btn">AI Lab</a>
+  </footer>
+
+  <script>
+    // Same corpProjects array — keep in sync with corporate.html
+    var corpProjects = [
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
+    ];
+
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    var idx = parseInt(getParam('i'));
+    var project = corpProjects[idx];
+    var content = document.getElementById('corp-content');
+
+    if (!project) {
+      content.innerHTML = '<p class="error">Not found.</p>';
+    } else {
+      var html = '';
+      if (project.title) html += '<p class="corp-title">' + project.title + '</p>';
+      if (project.client) html += '<p class="corp-client">' + project.client + '</p>';
+
+      if (project.vimeo) {
+        var parts = project.ratio.split('/');
+        var pct = (parseFloat(parts[1]) / parseFloat(parts[0]) * 100).toFixed(4) + '%';
+        var isVertical = parseFloat(parts[0]) < parseFloat(parts[1]);
+        var wrapStyle = isVertical ? 'max-width:440px;margin-left:auto;margin-right:auto;' : '';
+        html += '<div style="' + wrapStyle + '">'
+          + '<div class="vimeo-wrap" style="padding-bottom:' + pct + '">'
+          + '<iframe src="https://player.vimeo.com/video/' + project.vimeo
+          + '?color=ffffff&title=0&byline=0&portrait=0" '
+          + 'frameborder="0" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>'
+          + '</div></div>';
+      }
+
+      if (project.photos && project.photos.length > 0) {
+        html += '<div class="corp-grid-3">';
+        for (var i = 0; i < project.photos.length; i++) {
+          html += '<img src="' + project.photos[i] + '" alt="' + project.title + '" loading="lazy">';
+        }
+        html += '</div>';
+      }
+
+      content.innerHTML = html;
+    }
+  </script>
+
+</body>
+</html>

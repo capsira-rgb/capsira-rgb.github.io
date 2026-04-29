@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Gutierrez</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <span class="site-name">Laura Gutierrez</span>
+    <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
+  </header>
+
+  <main id="grid"></main>
+
+  <footer>
+    <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
+    <a href="ailab.html" class="ailab-btn">AI Lab</a>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script>
+    var grid = document.getElementById('grid');
+    for (var i = 0; i < projects.length; i++) {
+      var project = projects[i];
+      var posterSrc = 'projects/' + project.folder + '/' + project.poster;
+      var item = document.createElement('a');
+      item.className = 'grid-item';
+      item.href = 'project.html?p=' + encodeURIComponent(project.folder);
+      item.style.animationDelay = (i * 35) + 'ms';
+      item.innerHTML =
+        '<div class="grid-item-inner">' +
+          '<img class="poster" src="' + posterSrc + '" onerror="this.onerror=null;this.src=\'lorem.png\'" alt="' + project.title + '" loading="lazy">' +
+          '<div class="overlay">' +
+            '<span class="overlay-title">' + project.title + '</span>' +
+          '</div>' +
+        '</div>';
+      grid.appendChild(item);
+    }
+  </script>
+
+</body>
+</html>
