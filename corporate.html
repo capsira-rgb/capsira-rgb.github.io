@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laura Gutierrez</title>
+  <title>Laura Gutierrez — Corporate</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
     <a href="index.html" class="site-name back-link">Laura Gutierrez</a>
     <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
   </header>
 
-  <main id="corp-grid"></main>
+  <main id="grid"></main>
 
   <footer>
     <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
@@ -22,7 +21,7 @@
 
   <script src="corporate-projects.js"></script>
   <script>
-    var grid = document.getElementById('corp-grid');
+    var grid = document.getElementById('grid');
     for (var i = 0; i < corpProjects.length; i++) {
       var p = corpProjects[i];
       var item = document.createElement('a');
@@ -39,6 +38,5 @@
       grid.appendChild(item);
     }
   </script>
-
 </body>
 </html>
