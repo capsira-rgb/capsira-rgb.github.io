@@ -1,0 +1,355 @@
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0e0e0e;
+  --white: #f5f4f0;
+  --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --nav-h: 52px;
+  --footer-h: 52px;
+  --gap: 3px;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ─── Shared text ────────────────────────────────────────── */
+.site-name, .contact-link, .tagline, .ailab-btn, .overlay-title, .project-title {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  background: transparent;
+}
+
+.back-link { cursor: pointer; transition: opacity 0.2s; }
+.back-link:hover, .contact-link:hover, .ailab-btn:hover { opacity: 0.45; }
+
+/* ─── Footer ─────────────────────────────────────────────── */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--footer-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  background: transparent;
+  pointer-events: none;
+}
+footer > * { pointer-events: auto; }
+
+/* ─── Landing Grid ───────────────────────────────────────── */
+main#grid {
+  margin-top: var(--nav-h);
+  padding-bottom: var(--footer-h);
+  columns: 3;
+  column-gap: var(--gap);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
+  padding-top: var(--gap);
+  flex: 1;
+}
+
+.grid-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: #d8d6d0;
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.grid-item-inner { width: 100%; position: relative; }
+
+.grid-item img.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.grid-item:hover img.poster { transform: scale(1.03); }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14,14,14,0);
+  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+.grid-item:hover .overlay {
+  background: rgba(14,14,14,0.32);
+  backdrop-filter: blur(6px) brightness(0.85);
+  -webkit-backdrop-filter: blur(6px) brightness(0.85);
+}
+
+.overlay-title {
+  color: #f5f4f0;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.grid-item:hover .overlay-title { opacity: 1; transform: translateY(0); }
+
+/* ─── Project Page ───────────────────────────────────────── */
+body.project-page main {
+  margin-top: var(--nav-h);
+  padding: 48px 24px calc(var(--footer-h) + 48px);
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 1;
+}
+
+.project-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ─── Video embeds ───────────────────────────────────────── */
+.videos-container { width: 100%; }
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.video-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-wrap.ratio-16-9 { aspect-ratio: 16 / 9; }
+.video-wrap.ratio-9-16 { aspect-ratio: 9 / 16; max-width: 440px; margin-left: auto; margin-right: auto; }
+.video-wrap.ratio-1-1  { aspect-ratio: 1 / 1;  max-width: 600px; margin-left: auto; margin-right: auto; }
+.video-wrap.ratio-4-5  { aspect-ratio: 4 / 5;  max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* ─── Photo masonry ──────────────────────────────────────── */
+.photo-masonry {
+  columns: 2;
+  column-gap: 24px;
+}
+
+.photo-masonry img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+  break-inside: avoid;
+}
+
+.photo-masonry img:nth-child(3n+1) { margin-bottom: 36px; }
+.photo-masonry img:nth-child(3n+2) { margin-bottom: 16px; }
+
+/* ─── AI Lab gate ────────────────────────────────────────── */
+.ailab-gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.ailab-gate-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 0 24px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.ailab-gate-label {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.ailab-gate-input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid rgba(14,14,14,0.3);
+  padding: 10px 0;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  outline: none;
+  text-align: center;
+}
+.ailab-gate-input::placeholder { color: #ccc; font-weight: 300; }
+.ailab-gate-input:focus { border-bottom-color: var(--black); }
+
+.ailab-gate-btn {
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity 0.2s;
+}
+.ailab-gate-btn:hover { opacity: 0.45; }
+
+.ailab-gate-error {
+  font-family: var(--font);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #999;
+  min-height: 16px;
+}
+
+.ailab-divider {
+  width: 40px;
+  height: 0.5px;
+  background: rgba(14,14,14,0.15);
+  margin: 16px 0;
+}
+
+.ailab-heading {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.ailab-input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid rgba(14,14,14,0.2);
+  padding: 8px 0;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  outline: none;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.ailab-input::placeholder { color: #bbb; }
+.ailab-input:focus { border-bottom-color: var(--black); }
+
+.ailab-submit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  animation: pulse-triangle 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-triangle {
+  0%   { opacity: 0.25; filter: hue-rotate(0deg); }
+  25%  { opacity: 1;    filter: hue-rotate(80deg); }
+  50%  { opacity: 0.5;  filter: hue-rotate(180deg); }
+  75%  { opacity: 1;    filter: hue-rotate(280deg); }
+  100% { opacity: 0.25; filter: hue-rotate(360deg); }
+}
+
+.ailab-sent {
+  display: none;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* ─── AI Lab content ─────────────────────────────────────── */
+.ailab-content {
+  margin-top: var(--nav-h);
+  padding: var(--gap) var(--gap) calc(var(--footer-h) + var(--gap));
+}
+
+.ailab-grid {
+  columns: 3;
+  column-gap: var(--gap);
+}
+
+.ailab-grid img,
+.ailab-grid video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--gap);
+  break-inside: avoid;
+}
+
+/* ─── Error ──────────────────────────────────────────────── */
+.error { font-size: 12px; color: #9a9890; padding: 40px 0; }
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  main#grid { columns: 2; }
+  .photo-masonry { columns: 1; }
+  .ailab-grid { columns: 2; }
+  body.project-page main { padding: 32px 16px calc(var(--footer-h) + 32px); }
+  .site-name, .contact-link, .tagline, .ailab-btn, .overlay-title, .project-title { font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  main#grid { columns: 1; }
+  .ailab-grid { columns: 1; }
+}
