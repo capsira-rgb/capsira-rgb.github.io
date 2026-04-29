@@ -132,10 +132,12 @@ main#grid {
 body.project-page main {
   margin-top: var(--nav-h);
   padding: 48px 24px calc(var(--footer-h) + 48px);
+  width: 100%;
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
   flex: 1;
+  box-sizing: border-box;
 }
 
 .project-title {

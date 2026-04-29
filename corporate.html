@@ -28,9 +28,10 @@
       item.className = 'grid-item';
       item.href = 'corporate-project.html?i=' + i;
       item.style.animationDelay = (i * 35) + 'ms';
+      var thumb = 'https://vumbnail.com/' + p.vimeo + '.jpg';
       item.innerHTML =
         '<div class="grid-item-inner">' +
-          '<img class="poster" src="lorem.png" onerror="this.onerror=null" alt="' + p.title + '" loading="lazy">' +
+          '<img class="poster" src="' + thumb + '" onerror="this.src='lorem.png'" alt="' + p.title + '" loading="lazy">' +
           '<div class="overlay">' +
             '<span class="overlay-title">' + p.title + '</span>' +
           '</div>' +
