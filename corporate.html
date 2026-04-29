@@ -20,23 +20,8 @@
     <a href="ailab.html" class="ailab-btn">AI Lab</a>
   </footer>
 
+  <script src="corporate-projects.js"></script>
   <script>
-    // Corporate projects — fill in title and vimeo when ready
-    var corpProjects = [
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-      { title: "", vimeo: "" },
-    ];
-
     var grid = document.getElementById('corp-grid');
     for (var i = 0; i < corpProjects.length; i++) {
       var p = corpProjects[i];
@@ -46,9 +31,9 @@
       item.style.animationDelay = (i * 35) + 'ms';
       item.innerHTML =
         '<div class="grid-item-inner">' +
-          '<img class="poster" src="lorem.png" onerror="this.onerror=null" alt="' + (p.title || '') + '" loading="lazy">' +
+          '<img class="poster" src="lorem.png" onerror="this.onerror=null" alt="' + p.title + '" loading="lazy">' +
           '<div class="overlay">' +
-            '<span class="overlay-title">' + (p.title || '') + '</span>' +
+            '<span class="overlay-title">' + p.title + '</span>' +
           '</div>' +
         '</div>';
       grid.appendChild(item);

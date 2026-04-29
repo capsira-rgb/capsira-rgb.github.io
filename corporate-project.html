@@ -24,18 +24,8 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-align: center;
-      margin-bottom: 8px;
-      color: var(--black);
-    }
-    .corp-client {
-      font-family: var(--font);
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
       margin-bottom: 32px;
-      color: #9a9890;
+      color: var(--black);
     }
     .corp-grid-3 {
       columns: 3;
@@ -50,7 +40,7 @@
       break-inside: avoid;
     }
     @media (max-width: 768px) {
-      .corp-grid-3 { columns: 2; }
+      .corp-grid-3 { columns: 1; }
     }
   </style>
 </head>
@@ -68,23 +58,8 @@
     <a href="ailab.html" class="ailab-btn">AI Lab</a>
   </footer>
 
+  <script src="corporate-projects.js"></script>
   <script>
-    // Same corpProjects array — keep in sync with corporate.html
-    var corpProjects = [
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-      { title: "", client: "", vimeo: "", ratio: "16/9", photos: [] },
-    ];
-
     function getParam(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
@@ -96,16 +71,14 @@
     if (!project) {
       content.innerHTML = '<p class="error">Not found.</p>';
     } else {
-      var html = '';
-      if (project.title) html += '<p class="corp-title">' + project.title + '</p>';
-      if (project.client) html += '<p class="corp-client">' + project.client + '</p>';
+      var html = '<p class="corp-title">' + project.title + '</p>';
 
       if (project.vimeo) {
         var parts = project.ratio.split('/');
         var pct = (parseFloat(parts[1]) / parseFloat(parts[0]) * 100).toFixed(4) + '%';
         var isVertical = parseFloat(parts[0]) < parseFloat(parts[1]);
-        var wrapStyle = isVertical ? 'max-width:440px;margin-left:auto;margin-right:auto;' : '';
-        html += '<div style="' + wrapStyle + '">'
+        var outerStyle = isVertical ? 'max-width:440px;margin-left:auto;margin-right:auto;' : '';
+        html += '<div style="' + outerStyle + '">'
           + '<div class="vimeo-wrap" style="padding-bottom:' + pct + '">'
           + '<iframe src="https://player.vimeo.com/video/' + project.vimeo
           + '?color=ffffff&title=0&byline=0&portrait=0" '
