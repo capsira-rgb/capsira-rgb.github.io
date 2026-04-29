@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Gutierrez</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="site-name back-link">Laura Gutierrez</a>
+    <a href="mailto:capsira@gmail.com" class="contact-link">Contact</a>
+  </header>
+
+  <main id="grid"></main>
+
+  <footer>
+    <span class="tagline">Video &nbsp;·&nbsp; Photo &nbsp;·&nbsp; Content creator</span>
+    <a href="ailab.html" class="ailab-btn">AI Lab</a>
+  </footer>
+
+  <script>
+    var corpProjects = [
+      { title: "Batmobile 1989 - Planeta DeAgostini", vimeo: "1187671109" },
+      { title: "Fundador",                            vimeo: "734340317"  },
+      { title: "Kitakat",                             vimeo: "668262853"  },
+      { title: "MAGGI Romania",                       vimeo: "1187661642" },
+      { title: "Curtidos Badia & Reishi",             vimeo: "387914719"  },
+      { title: "Desigual - Love Yourself",            vimeo: "415449077"  },
+      { title: "Alphalink",                           vimeo: "387449782"  },
+      { title: "Cellnex & Saba - Tecnologia 5G",      vimeo: "324929901"  },
+      { title: "BonArea",                             vimeo: "292930813"  },
+      { title: "Orbit & Aldeas Infantiles",           vimeo: "282174371"  },
+      { title: "Gallina Blanca - Paella de marisco",  vimeo: "220763918"  },
+      { title: "Hospital Sant Joan de Deu",           vimeo: "249498362"  },
+      { title: "Spot Sant Cugat",                     vimeo: "328611890"  },
+      { title: "Alteza - Nos lo merecemos",           vimeo: "195939550"  },
+      { title: "CaixaBank - Posgrados",               vimeo: "219498318"  },
+      { title: "Hilton - Venture Beyond",             vimeo: "726131239"  },
+      { title: "Sanex - Making Off",                  vimeo: "328637202"  },
+      { title: "Nespresso - Simetria",                vimeo: "282173719"  },
+      { title: "Sorli - Som un equip",                vimeo: "301172297"  },
+      { title: "Desigual Wholesale - Denim",          vimeo: "250153572"  },
+      { title: "Wedding Experience",                  vimeo: "249406007"  }
+    ];
+
+    var grid = document.getElementById('grid');
+
+    for (var i = 0; i < corpProjects.length; i++) {
+      var p = corpProjects[i];
+      var item = document.createElement('a');
+      item.className = 'grid-item';
+      item.href = 'corporate-project.html?i=' + i;
+      item.style.animationDelay = (i * 35) + 'ms';
+
+      var thumb = 'https://vumbnail.com/' + p.vimeo + '.jpg';
+
+      item.innerHTML =
+        '<div class="grid-item-inner">' +
+          '<img class="poster" src="' + thumb + '" ' +
+          'onerror="this.onerror=null;this.src=\'lorem.png\'" ' +
+          'alt="' + p.title + '" loading="lazy">' +
+          '<div class="overlay">' +
+            '<span class="overlay-title">' + p.title + '</span>' +
+          '</div>' +
+        '</div>';
+
+      grid.appendChild(item);
+    }
+  </script>
+
+</body>
+</html>
