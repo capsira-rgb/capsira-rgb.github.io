@@ -84,7 +84,22 @@
       }
     }
 
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+
     function showContent() {
+      // Shuffle video order on each access
+      var grid = document.querySelector('.ailab-grid');
+      if (grid) {
+        var videos = Array.prototype.slice.call(grid.querySelectorAll('video'));
+        shuffle(videos);
+        videos.forEach(function(v) { grid.appendChild(v); });
+      }
       document.getElementById('ailabGate').style.display = 'none';
       document.getElementById('ailabContent').style.display = 'block';
     }
