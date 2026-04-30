@@ -100,7 +100,8 @@
         v.setAttribute('muted', '');
         v.setAttribute('loop', '');
         v.setAttribute('playsinline', '');
-        v.setAttribute('loading', 'lazy');
+        v.muted = true;
+        v.volume = 0;
         // Lazy: use IntersectionObserver to load src only when near viewport
         v.setAttribute('data-src', src);
         v.style.display = 'block';
@@ -127,7 +128,7 @@
               observer.unobserve(v);
             }
           });
-        }, { rootMargin: '200px' });
+        }, { rootMargin: '400px' });
         videos.forEach(function(v) { observer.observe(v); });
       } else {
         // Fallback: load all
