@@ -35,30 +35,7 @@
 
   <!-- AI LAB CONTENT -->
   <main class="ailab-content" id="ailabContent" style="display:none">
-    <div class="ailab-grid">
-      <video autoplay muted loop playsinline><source src="ailab/07_byredo_1.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/AB_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/AB_04.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/AB4.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/AB5.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Benetton_colors_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/byredo_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Byredo_02 2.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Byredo_02.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/ElevenLabs_video_shak.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_02.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_03.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_04.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_05.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/sisterland_06.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_07.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Sisterland_08.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Spf_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/spf_02.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Tribe_01.mp4" type="video/mp4"></video>
-      <video autoplay muted loop playsinline><source src="ailab/Tribe_02.mp4" type="video/mp4"></video>
-    </div>
+    <div class="ailab-grid" id="ailabGrid"></div>
   </main>
 
   <footer>
@@ -68,6 +45,100 @@
 
   <script>
     var PASSWORD = 'WELCOME26';
+
+    var videos = [
+      "ailab/01_spf_3.mp4",
+      "ailab/04_mimosa.mp4",
+      "ailab/07_byredo_1.mp4",
+      "ailab/AB_01.mp4",
+      "ailab/AB_04.mp4",
+      "ailab/AB4.mp4",
+      "ailab/AB5.mp4",
+      "ailab/Benetton_colors_01.mp4",
+      "ailab/byredo_01.mp4",
+      "ailab/Byredo_02.mp4",
+      "ailab/ElevenLabs_video_shak.mp4",
+      "ailab/hf_20260413_180842.mp4",
+      "ailab/hf_20260413_181009.mp4",
+      "ailab/hf_20260413_194600.mp4",
+      "ailab/hf_20260414_100152.mp4",
+      "ailab/hf_20260414_100818.mp4",
+      "ailab/hf_20260429_141544.mp4",
+      "ailab/hf_20260429_141715_e.mp4",
+      "ailab/hf_20260429_142433.mp4",
+      "ailab/hf_20260429_142858_.mp4",
+      "ailab/hf_20260429_145140.mp4",
+      "ailab/References_to_Video_-_A_young_woman_withS.mp4",
+      "ailab/Sisterland_01.mp4",
+      "ailab/Sisterland_02.mp4",
+      "ailab/Sisterland_03.mp4",
+      "ailab/Sisterland_04.mp4",
+      "ailab/Sisterland_05.mp4",
+      "ailab/sisterland_06.mp4",
+      "ailab/Sisterland_07.mp4",
+      "ailab/Sisterland_08.mp4",
+      "ailab/Slow_motion_cinematic_product__Kling_25_Turbo_Pro_66125.mp4",
+      "ailab/Spf_01.mp4",
+      "ailab/spf_02.mp4",
+      "ailab/Tribe_01.mp4",
+      "ailab/Tribe_02.mp4"
+    ];
+
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+
+    function buildGrid(srcs) {
+      var grid = document.getElementById('ailabGrid');
+      srcs.forEach(function(src) {
+        var v = document.createElement('video');
+        v.setAttribute('autoplay', '');
+        v.setAttribute('muted', '');
+        v.setAttribute('loop', '');
+        v.setAttribute('playsinline', '');
+        v.setAttribute('loading', 'lazy');
+        // Lazy: use IntersectionObserver to load src only when near viewport
+        v.setAttribute('data-src', src);
+        v.style.display = 'block';
+        v.style.width = '100%';
+        v.style.height = 'auto';
+        v.style.marginBottom = 'var(--gap)';
+        v.style.breakInside = 'avoid';
+        grid.appendChild(v);
+      });
+      lazyLoad();
+    }
+
+    function lazyLoad() {
+      var videos = document.querySelectorAll('video[data-src]');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var v = entry.target;
+              var src = v.getAttribute('data-src');
+              v.innerHTML = '<source src="' + src + '" type="video/mp4">';
+              v.load();
+              v.removeAttribute('data-src');
+              observer.unobserve(v);
+            }
+          });
+        }, { rootMargin: '200px' });
+        videos.forEach(function(v) { observer.observe(v); });
+      } else {
+        // Fallback: load all
+        videos.forEach(function(v) {
+          var src = v.getAttribute('data-src');
+          v.innerHTML = '<source src="' + src + '" type="video/mp4">';
+          v.load();
+          v.removeAttribute('data-src');
+        });
+      }
+    }
 
     if (sessionStorage.getItem('ailab_access') === '1') {
       showContent();
@@ -84,22 +155,8 @@
       }
     }
 
-    function shuffle(arr) {
-      for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
-      }
-      return arr;
-    }
-
     function showContent() {
-      // Shuffle video order on each access
-      var grid = document.querySelector('.ailab-grid');
-      if (grid) {
-        var videos = Array.prototype.slice.call(grid.querySelectorAll('video'));
-        shuffle(videos);
-        videos.forEach(function(v) { grid.appendChild(v); });
-      }
+      buildGrid(shuffle(videos.slice()));
       document.getElementById('ailabGate').style.display = 'none';
       document.getElementById('ailabContent').style.display = 'block';
     }
