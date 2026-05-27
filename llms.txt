@@ -1,0 +1,13 @@
+# Laura Gutierrez
+
+> Personal portfolio of Laura Gutierrez — video, photo and content creator. Showcases selected work in film, photography and digital content. Site: lauragutierrez.co.
+
+## Pages
+
+- [Home — portfolio](https://lauragutierrez.co/): grid of selected video, photo and content projects.
+- [AI Lab](https://lauragutierrez.co/ailab.html): experiments with AI-assisted creative work.
+
+## About
+
+- Laura Gutierrez is a video, photo and content creator.
+- Contact: hola@lauragutierrez.co
