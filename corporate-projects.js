@@ -1,7 +1,7 @@
 var corpProjects = [
   { title: "Batmobile 1989 - Planeta DeAgostini", vimeo: "1187671109", ratio: "16/9", photos: [] },
   { title: "Fundador",                            vimeo: "734340317",   ratio: "16/9", photos: [] },
-  { title: "Kitakat",                             vimeo: "668262853",   ratio: "16/9", photos: [] },
+  { title: "Kit Kat",                              vimeo: "668262853",   ratio: "16/9", photos: [] },
   { title: "MAGGI Romania",                       vimeo: "1187661642",  ratio: "16/9", photos: [] },
   { title: "Curtidos Badia & Reishi",             vimeo: "387914719",   ratio: "16/9", photos: [] },
   { title: "Desigual - Love Yourself",            vimeo: "415449077",   ratio: "16/9", photos: [] },
